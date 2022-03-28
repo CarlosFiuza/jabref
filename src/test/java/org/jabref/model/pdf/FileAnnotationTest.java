@@ -1,15 +1,22 @@
 package org.jabref.model.pdf;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
-
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FileAnnotationTest {
+
+    @Test
+    public void testNullDateTimeString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        assertEquals(LocalDateTime.now().format(formatter), FileAnnotation.extractModifiedTime(null).format(formatter));
+    }
 
     @Test
     public void testParseDateMinusBeforeTimezone() {
